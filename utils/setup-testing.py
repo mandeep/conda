@@ -27,6 +27,8 @@ from conda._vendor.auxlib import packaging  # NOQA
 with open(os.path.join(src_dir, "README.rst")) as f:
     long_description = f.read()
 
+import versioneer
+
 install_requires = [
     'pycosat >=0.6.1',
     'requests >=2.5.3',
@@ -38,7 +40,7 @@ if sys.version_info < (3, 4):
 
 setup(
     name=conda.__name__,
-    version=conda.__version__,
+    version=versioneer.get_version(),
     author=conda.__author__,
     author_email=conda.__email__,
     url=conda.__url__,

@@ -11,6 +11,8 @@ if 'develop' in sys.argv:
 else:
     from distutils.core import setup
 
+import versioneer
+
 if not (sys.version_info[:2] == (2, 7) or sys.version_info[:2] >= (3, 3)):
     sys.exit("conda is only meant for Python 2.7 or 3.3 and up.  "
              "current version: %d.%d" % sys.version_info[:2])
@@ -74,7 +76,7 @@ if sys.platform == "win32":
 
 setup(
     name=conda.__name__,
-    version=conda.__version__,
+    version=versioneer.get_version(),
     author=conda.__author__,
     author_email=conda.__email__,
     url=conda.__url__,
@@ -97,10 +99,11 @@ setup(
                                                                    "build",
                                                                    "utils",
                                                                    ".tox")),
-    cmdclass={
-        'build_py': conda._vendor.auxlib.packaging.BuildPyCommand,
-        'sdist': conda._vendor.auxlib.packaging.SDistCommand,
-    },
+    # cmdclass={
+    #     'build_py': conda._vendor.auxlib.packaging.BuildPyCommand,
+    #     'sdist': conda._vendor.auxlib.packaging.SDistCommand,
+    # },
+    cmdclass=versioneer.get_cmdclass(),
     entry_points={
         'console_scripts': [
             'conda=conda.cli.pip_warning:main',

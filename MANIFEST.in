@@ -6,3 +6,5 @@ include setup.cfg
 include setup.py
 recursive-exclude tests *
 recursive-exclude shell *
+include versioneer.py
+include conda/version.py
