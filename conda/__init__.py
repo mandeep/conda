@@ -10,8 +10,9 @@ import os
 from os.path import dirname
 import sys
 
-from ._vendor.auxlib.packaging import get_version
+# from ._vendor.auxlib.packaging import get_version
 from .common.compat import iteritems, text_type
+
 
 __all__ = (
     "__name__", "__version__", "__author__", "__email__", "__license__", "__summary__", "__url__",
@@ -19,12 +20,15 @@ __all__ = (
 )
 
 __name__ = "conda"
-__version__ = get_version(__file__)
 __author__ = "Continuum Analytics, Inc."
 __email__ = "conda@continuum.io"
 __license__ = "BSD"
 __summary__ = __doc__
 __url__ = "https://github.com/conda/conda"
+
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
 
 
 if os.getenv('CONDA_ROOT') is None:
@@ -108,10 +112,3 @@ def conda_signal_handler(signum, frame):
 
     from .exceptions import CondaSignalInterrupt
     raise CondaSignalInterrupt(signum)
-
-# from ._version import get_versions
-# __version__ = get_versions()['version']
-# del get_versions
-
-import versioneer
-__version__ = versioneer.get_version()

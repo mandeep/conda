@@ -15,6 +15,7 @@ if not (sys.version_info[:2] == (2, 7) or sys.version_info[:2] >= (3, 3)):
     sys.exit("conda is only meant for Python 2.7 or 3.3 and up.  "
              "current version: %d.%d" % sys.version_info[:2])
 
+
 # When executing setup.py, we need to be able to import ourselves, this
 # means that we need to add the src directory to the sys.path.
 here = os.path.abspath(os.path.dirname(__file__))
@@ -27,7 +28,6 @@ from conda._vendor.auxlib import packaging  # NOQA
 with open(os.path.join(src_dir, "README.rst")) as f:
     long_description = f.read()
 
-import versioneer
 
 install_requires = [
     'pycosat >=0.6.1',
@@ -40,7 +40,7 @@ if sys.version_info < (3, 4):
 
 setup(
     name=conda.__name__,
-    version=versioneer.get_version(),
+    version=conda.__version__,
     author=conda.__author__,
     author_email=conda.__email__,
     url=conda.__url__,
